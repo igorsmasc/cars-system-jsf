@@ -15,9 +15,10 @@ import java.util.List;
  *
  * @author Igor Santos
  */
-public class CarDAO {
+public class CarDAO implements CrudDAO<Car>{
     
-    public void saveCar(Car car) throws ErrorSystem{
+    @Override
+    public void save(Car car) throws ErrorSystem{
         try {
             Connection con = CarFactoryConnection.getCon();
             PreparedStatement ps;
@@ -39,18 +40,20 @@ public class CarDAO {
         
     }
     
-    public void deleteCar(Integer idCar) throws ErrorSystem{
+    @Override
+    public void delete(Car car) throws ErrorSystem{
         try {
             Connection con = CarFactoryConnection.getCon();
             PreparedStatement ps = con.prepareStatement("delete from car where id = ?");
-            ps.setInt(1, idCar);
+            ps.setInt(1, car.getId());
             ps.execute();
         } catch (SQLException ex) {
             throw new ErrorSystem("DELETE CAR ERROR!", ex);
         }
     }
     
-        public List<Car> findAll() throws ErrorSystem{
+    @Override
+    public List<Car> findAll() throws ErrorSystem{
         try {
             Connection con = CarFactoryConnection.getCon();
             PreparedStatement ps = con.prepareStatement("select * from car");
