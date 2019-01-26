@@ -1,15 +1,13 @@
-
 package br.com.carssystem.entity;
 
-/**
- *
- * @author igors
- */
+import java.util.Date;
+
 public class Car {
+    
     private String model;
     private String brand;
     private String color;
-    private Integer year; //O valor de Integer nunca será null, inicia com 0
+    private Date year;
 
     public String getModel() {
         return model;
@@ -35,12 +33,16 @@ public class Car {
         this.color = color;
     }
 
-    public Integer getYear() {
+    public Date getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(Date year) {
         this.year = year;
     }
-   
+
+    
+    
+
+
 }

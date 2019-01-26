@@ -1,15 +1,12 @@
 package br.com.carssystem.managedbeans;
 
+import br.com.carssystem.dao.CarDAO;
 import br.com.carssystem.entity.Car;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-/**
- *
- * @author igors
- */
 @ManagedBean
 @SessionScoped
 public class CarBean {
@@ -17,9 +14,10 @@ public class CarBean {
     private Car car = new Car();
     private List<Car> cars = new ArrayList<>();
     
-    public void add(){
+    public void addCar(){
         cars.add(car);
-        car = new Car();
+        new CarDAO().saveCar(car);
+        car= new Car();
     }
 
     public Car getCar() {
@@ -34,10 +32,8 @@ public class CarBean {
         return cars;
     }
 
-    public void setCars(List<Car> cars) {
+    public void setCarros(List<Car> carros) {
         this.cars = cars;
     }
-    
-    
-    
+
 }
