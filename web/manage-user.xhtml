@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:p="http://primefaces.org/ui">
+
+
+    <h:form>
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+        <p:fieldset legend="Manage users">
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="NEW" action="#{userBean.newOne()}" update="@form"></p:commandButton>
+                    <p:commandButton value="SAVE" action="#{userBean.save()}" disabled="#{carBean.findOp == true}" update="@form"></p:commandButton>
+                    <p:commandButton value="FIND" action="#{userBean.findAll()}" update="@form"></p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+        <p:panelGrid columns="2" rendered="#{userBean.findOp == false}">
+            <h:outputLabel>User: </h:outputLabel>
+            <p:inputText value="#{userBean.entity.login}"></p:inputText>
+            <h:outputLabel>Password: </h:outputLabel>
+            <p:password value="#{userBean.entity.password}"></p:password>
+        </p:panelGrid>
+        <p:dataTable value="#{userBean.entitys}" var="u" rendered="#{userBean.findOp == true}">
+            <p:column>
+                <p:commandButton value="Edit" action="#{userBean.edit(u)}" update="@form"></p:commandButton>
+                <p:commandButton value="Delete" action="#{userBean.delete(u)}" update="@form"></p:commandButton>
+            </p:column>
+            <p:column headerText="Login">
+                #{u.login}
+            </p:column>
+            <p:column headerText="Password">
+                #{u.password}
+            </p:column>
+        </p:dataTable>
+        </p:fieldset>
+
+
+    </h:form>
+
+
+
+
+</ui:decorate>
+
