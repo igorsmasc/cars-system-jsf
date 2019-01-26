@@ -21,14 +21,14 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     
     public void newOne(){ //New
         entity = createNewEntity();
-        changeToInsert();
+        changeToInsertOp();
     }
     public void save(){
         try {
             getDao().save(entity);
             entity = createNewEntity();
             addMessage("SAVED! Saved successfully!", FacesMessage.SEVERITY_INFO);
-            changeToFind();
+            changeToFindOp();
         } catch (ErrorSystem ex) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, ex);
             addMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -36,7 +36,7 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     }
     public void edit(E entity){ 
         this.entity = entity;
-        changeToEdit();
+        changeToEditOp();
     }
     public void delete(E entity){
         try {
@@ -48,16 +48,18 @@ public abstract class CrudBean<E, D extends CrudDAO> {
             addMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
-    public void find(){    
-        if(!isFind()){
-            changeToFind();
+    
+    public void findAll(){    
+        if(isFindOp()){
+        } else {
+            changeToFindOp();
             return;
         }
     
         try {
             entitys = getDao().findAll();
             if(entitys.isEmpty()){
-                addMessage("We have nothing registered!", FacesMessage.SEVERITY_INFO);
+                addMessage("We have nothing registered!", FacesMessage.SEVERITY_WARN);
             }
         } catch (ErrorSystem ex) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,23 +97,23 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     public abstract E createNewEntity();
     
     //MÉTODOS PARA CONTROLE DA TELA
-    public boolean isInsert(){
+    public boolean isInsertOp(){
         return "insert".equals(screenState);
     }   
-    public boolean isEdit(){
+    public boolean isEditOp(){
         return "edit".equals(screenState);
     }    
-    public boolean isFind(){
+    public boolean isFindOp(){
         return "find".equals(screenState);
     }   
     
-    public void changeToInsert(){
+    public void changeToInsertOp(){
         screenState = "insert";
     }
-    public void changeToEdit(){
+    public void changeToEditOp(){
         screenState = "edit";
     }
-    public void changeToFind(){
+    public void changeToFindOp(){
         screenState = "find";
     }
 

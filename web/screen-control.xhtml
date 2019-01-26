@@ -7,16 +7,7 @@
              xmlns:p="http://primefaces.org/ui">
    
     <h1>Welcome to system</h1>
-    
-    <h:form>
-        <p:commandButton value="Change to Insert" update="@form" action="#{carBean.changeToInsert()}"></p:commandButton>
-        <p:commandButton value="Change to Find" update="@form" action="#{carBean.changeToFind()}"></p:commandButton>
-        <p:commandButton value="Change to Edit" update="@form" action="#{carBean.changeToEdit()}"></p:commandButton>
-        
-        <h:outputText value="Insert" rendered="#{carBean.insert}"></h:outputText>
-        <h:outputText value="Find" rendered="#{carBean.find}"></h:outputText>
-        <h:outputText value="Edit" rendered="#{carBean.edit}"></h:outputText>
-    </h:form>
+   
 
     
     
