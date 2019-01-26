@@ -2,10 +2,15 @@ package br.com.carssystem.managedbeans;
 
 import br.com.carssystem.dao.CarDAO;
 import br.com.carssystem.entity.Car;
+import br.com.carssystem.util.exception.ErrorSystem;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -16,16 +21,38 @@ public class CarBean {
     private CarDAO carDAO = new CarDAO();
     
     public void addCar(){
-        new CarDAO().saveCar(car);
-        car= new Car();
+        try {
+            new CarDAO().saveCar(car);
+            car= new Car();
+        } catch (ErrorSystem ex) {
+            addMessage(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
     }
 
     public void listCar(){
-        cars = carDAO.findAll();
+        try {
+            cars = carDAO.findAll();
+        } catch (ErrorSystem ex) {
+            addMessage(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
+    
+    public void deleteCar(Car c){
+        try {
+            carDAO.deleteCar(c.getId());
+        } catch (ErrorSystem ex) {
+            addMessage(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
     }
     
     public void edit(Car c){
         car = c;
+    }
+    
+    public void addMessage(String summary,String detail, FacesMessage.Severity errorType){
+        FacesContext context = FacesContext.getCurrentInstance();
+        FacesMessage message = new FacesMessage(errorType, summary, detail);
+        context.addMessage(null, message);
     }
     
     public Car getCar() {

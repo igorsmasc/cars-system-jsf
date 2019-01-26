@@ -36,9 +36,20 @@ public class CarDAO {
             ps.execute();
             CarFactoryConnection.closeCon();
         } catch (SQLException ex) {
-            Logger.getLogger(CarDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ErrorSystem("SAVE CAR ERROR!", ex);
         }
         
+    }
+    
+    public void deleteCar(Integer idCar) throws ErrorSystem{
+        try {
+            Connection con = CarFactoryConnection.getCon();
+            PreparedStatement ps = con.prepareStatement("delete from car where id = ?");
+            ps.setInt(1, idCar);
+            ps.execute();
+        } catch (SQLException ex) {
+            throw new ErrorSystem("DELETE CAR ERROR!", ex);
+        }
     }
     
         public List<Car> findAll() throws ErrorSystem{
@@ -61,8 +72,7 @@ public class CarDAO {
             CarFactoryConnection.closeCon();
             return cars;
         } catch (SQLException ex) {
-            Logger.getLogger(CarDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            throw new ErrorSystem("LIST CAR ERROR!", ex);
         }
         }
     
