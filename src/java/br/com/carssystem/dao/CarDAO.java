@@ -2,6 +2,7 @@ package br.com.carssystem.dao;
 
 import br.com.carssystem.entity.Car;
 import br.com.carssystem.util.CarFactoryConnection;
+import br.com.carssystem.util.exception.ErrorSystem;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class CarDAO {
     
-    public void saveCar(Car car){
+    public void saveCar(Car car) throws ErrorSystem{
         try {
             Connection con = CarFactoryConnection.getCon();
             PreparedStatement ps;
@@ -40,7 +41,7 @@ public class CarDAO {
         
     }
     
-        public List<Car> findAll(){
+        public List<Car> findAll() throws ErrorSystem{
         try {
             Connection con = CarFactoryConnection.getCon();
             PreparedStatement ps = con.prepareStatement("select * from car");
@@ -57,6 +58,7 @@ public class CarDAO {
                 car.setYear(resultSet.getDate("year"));
                 cars.add(car);
             }
+            CarFactoryConnection.closeCon();
             return cars;
         } catch (SQLException ex) {
             Logger.getLogger(CarDAO.class.getName()).log(Level.SEVERE, null, ex);
