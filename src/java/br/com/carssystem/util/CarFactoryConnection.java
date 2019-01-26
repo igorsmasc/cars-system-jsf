@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class CarFactoryConnection{
     
     private static Connection con;
-    private static final String URL_CONEXAO = "jdbc:mysql://localhost/car-system";
+    private static final String URL_CONEXAO = "jdbc:mysql://localhost:3307/cars-system";
     private static final String USUARIO = "admin";
     private static final String SENHA = "sbanco2013";
 

@@ -10,7 +10,8 @@
     <h:form>
         <p:toolbar>
             <p:toolbarGroup>
-                <p:commandButton value="Adicionar" action="#{carBean.addCar()}" update="@form"></p:commandButton>
+                <p:commandButton value="ADD" action="#{carBean.addCar()}" update="@form"></p:commandButton>
+                <p:commandButton value="FIND" action="#{carBean.listCar()}" update="@form"></p:commandButton>
             </p:toolbarGroup>
         </p:toolbar>
         <p:fieldset legend="Objects">

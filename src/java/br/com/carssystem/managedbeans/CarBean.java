@@ -13,6 +13,7 @@ public class CarBean {
     
     private Car car = new Car();
     private List<Car> cars = new ArrayList<>();
+    private CarDAO carDAO = new CarDAO();
     
     public void addCar(){
         cars.add(car);
@@ -20,6 +21,10 @@ public class CarBean {
         car= new Car();
     }
 
+    public void listCar(){
+        cars = carDAO.findAll();
+    }
+    
     public Car getCar() {
         return car;
     }
