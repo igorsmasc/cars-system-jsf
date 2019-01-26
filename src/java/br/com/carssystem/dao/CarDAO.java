@@ -18,7 +18,7 @@ public class CarDAO {
     public void saveCar(Car car){
         try {
             Connection con = CarFactoryConnection.getCon();
-            PreparedStatement ps = con.prepareCall("INSERT INTO `carro` (`modelo`,`fabricante`,`cor`,`ano`) VALUES (?,?,?,?)");
+            PreparedStatement ps = con.prepareCall("INSERT INTO `car` (`model`,`brand`,`color`,`year`) VALUES (?,?,?,?)");
             ps.setString(1, car.getModel());
             ps.setString(2, car.getBrand());
             ps.setString(3, car.getColor());

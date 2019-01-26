@@ -14,8 +14,8 @@ public class CarFactoryConnection{
     
     private static Connection con;
     private static final String URL_CONEXAO = "jdbc:mysql://localhost/car-system";
-    private static final String USUARIO = "root";
-    private static final String SENHA = null;
+    private static final String USUARIO = "admin";
+    private static final String SENHA = "sbanco2013";
 
     public static Connection getCon() {
         if(con == null){
