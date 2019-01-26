@@ -14,6 +14,7 @@
                 <p:commandButton value="FIND" action="#{carBean.listCar()}" update="@form"></p:commandButton>
             </p:toolbarGroup>
         </p:toolbar>
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
         <p:fieldset legend="Objects">
             <p:panelGrid columns="2">
                 <h:outputLabel value="Model"></h:outputLabel>
@@ -31,6 +32,7 @@
             <p:dataTable value="#{carBean.cars}" var="car">
                 <p:column>
                     <p:commandButton value="Edit" action="#{carBean.edit(car)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Delete" action="#{carBean.deleteCar(car)}" update="@form"></p:commandButton>
                 </p:column>
                     
                 <p:column headerText="Model" sortBy="#{car.model}">

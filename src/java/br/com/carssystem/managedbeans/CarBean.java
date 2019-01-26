@@ -5,8 +5,6 @@ import br.com.carssystem.entity.Car;
 import br.com.carssystem.util.exception.ErrorSystem;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -24,6 +22,7 @@ public class CarBean {
         try {
             new CarDAO().saveCar(car);
             car= new Car();
+            addMessage("SAVED!", "CAR SAVED WITH SUCCESS!", FacesMessage.SEVERITY_INFO);
         } catch (ErrorSystem ex) {
             addMessage(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -32,6 +31,9 @@ public class CarBean {
     public void listCar(){
         try {
             cars = carDAO.findAll();
+            if(cars.isEmpty()){
+                addMessage("NO DATA FOUND!", "YOUR SEARCH RETURNED NO CARS!", FacesMessage.SEVERITY_WARN);
+            }
         } catch (ErrorSystem ex) {
             addMessage(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -40,6 +42,7 @@ public class CarBean {
     public void deleteCar(Car c){
         try {
             carDAO.deleteCar(c.getId());
+            addMessage("DELETED!", "CAR DELETED WITH SUCCESS!", FacesMessage.SEVERITY_INFO);
         } catch (ErrorSystem ex) {
             addMessage(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }

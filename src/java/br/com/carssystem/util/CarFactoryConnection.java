@@ -3,8 +3,6 @@ package br.com.carssystem.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import br.com.carssystem.util.exception.ErrorSystem;
 
 /**
@@ -26,7 +24,6 @@ public class CarFactoryConnection{
             } catch (SQLException ex) {
                 throw new ErrorSystem("COULD NOT CONNECT TO DATABASE", ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CarFactoryConnection.class.getName()).log(Level.SEVERE, null, ex);
                 throw new ErrorSystem("DATABASE DRIVER - NOT FOUND", ex);
             }
         }

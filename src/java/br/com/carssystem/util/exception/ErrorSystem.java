@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.carssystem.util.exception;
 
 /**
  *
  * @author igors
  */
-public class ErrorSystem {
+public class ErrorSystem extends Exception {
+
+    public ErrorSystem(String message) {
+        super(message);
+    }
+
+    public ErrorSystem(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     
 }
