@@ -21,7 +21,13 @@ public class CarDAO {
     public void saveCar(Car car){
         try {
             Connection con = CarFactoryConnection.getCon();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO `car` (`model`,`brand`,`color`,`year`) VALUES (?,?,?,?)");
+            PreparedStatement ps;
+            if(car.getId() == null){
+            ps = con.prepareStatement("INSERT INTO `car` (`model`,`brand`,`color`,`year`) VALUES (?,?,?,?)");
+            } else {
+                ps = con.prepareStatement("UPDATE car set model=?, brand=?, color=?, year=? where id=?");    
+                ps.setInt(5, car.getId());
+            }
             ps.setString(1, car.getModel());
             ps.setString(2, car.getBrand());
             ps.setString(3, car.getColor());
@@ -47,6 +53,7 @@ public class CarDAO {
                 car.setId(resultSet.getInt("id"));
                 car.setModel(resultSet.getString("model"));
                 car.setBrand(resultSet.getString("brand"));
+                car.setColor(resultSet.getString("color"));
                 car.setYear(resultSet.getDate("year"));
                 cars.add(car);
             }

@@ -29,6 +29,10 @@
                 <p:calendar value="#{carBean.car.year}" ></p:calendar>
             </p:panelGrid>
             <p:dataTable value="#{carBean.cars}" var="car">
+                <p:column>
+                    <p:commandButton value="Edit" action="#{carBean.edit(car)}" update="@form"></p:commandButton>
+                </p:column>
+                    
                 <p:column headerText="Model" sortBy="#{car.model}">
                     <h:outputText value="#{car.model}"></h:outputText>
                 </p:column>

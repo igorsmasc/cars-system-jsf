@@ -16,13 +16,16 @@ public class CarBean {
     private CarDAO carDAO = new CarDAO();
     
     public void addCar(){
-        cars.add(car);
         new CarDAO().saveCar(car);
         car= new Car();
     }
 
     public void listCar(){
         cars = carDAO.findAll();
+    }
+    
+    public void edit(Car c){
+        car = c;
     }
     
     public Car getCar() {
