@@ -8,14 +8,19 @@
         <title>Car System</title>
     </h:head>
     <h:body>
+        <h:panelGrid columns="2">
+        <h:graphicImage library="images" name="logo_carro.jpg" width="150px"></h:graphicImage>
         <h1>Car System</h1>
+        </h:panelGrid>
         <hr/>
         <h:form>
-        <p:menubar>
-            <p:menuitem value="Home" url="index.jsf"></p:menuitem>
-            <p:menuitem value="Manage car" url="manage-car.jsf"></p:menuitem>
-            <p:menuitem value="Manage user" url="manage-user.jsf"></p:menuitem>
-        </p:menubar> 
+            <p:menubar>
+                <p:menuitem value="Home" url="index.jsf"></p:menuitem>
+                <p:submenu label="Manage" icon="ui-icon-gear">
+                    <p:menuitem value="Cars" url="manage-car.jsf"></p:menuitem>
+                    <p:menuitem value="Users" url="manage-user.jsf"></p:menuitem>
+                </p:submenu>
+            </p:menubar>
         </h:form>
             
         <ui:insert></ui:insert>

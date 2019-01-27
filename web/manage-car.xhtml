@@ -5,20 +5,15 @@
              xmlns:p="http://primefaces.org/ui"
              xmlns:f="http://xmlns.jcp.org/jsf/core"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             template="template.xhtml">
+             template="template.xhtml"
+             xmlns:mc="http://xmlns.jcp.org/jsf/composite/mccomp">
 
     <h:form>
-       
+
         <p:messages autoUpdate="true" showDetail="true"></p:messages>
         <p:fieldset legend="Manage cars">
-             <p:toolbar>
-        <p:toolbarGroup>
-                <p:commandButton value="NEW" action="#{carBean.newOne()}" update="@form"></p:commandButton>
-                <p:commandButton value="SAVE" action="#{carBean.save()}" disabled="#{carBean.findOp == true}" update="@form"></p:commandButton>
-                <p:commandButton value="FIND" action="#{carBean.findAll()}" update="@form"></p:commandButton>
-            </p:toolbarGroup>
-        </p:toolbar>
-        <p:panelGrid columns="2" rendered="#{carBean.findOp == false}">
+            <mc:toolbarCrud crudBean="#{carBean}"/>
+            <p:panelGrid columns="2" rendered="#{carBean.findOp == false}">
                 <h:outputLabel value="Model"></h:outputLabel>
                 <p:inputText value="#{carBean.entity.model}"></p:inputText>
 
@@ -31,12 +26,12 @@
                 <h:outputLabel value="Year"></h:outputLabel>
                 <p:calendar value="#{carBean.entity.year}" ></p:calendar>
             </p:panelGrid>
-        <p:dataTable value="#{carBean.entitys}" var="car" rendered="#{carBean.findOp == true}">
+            <p:dataTable value="#{carBean.entitys}" var="car" rendered="#{carBean.findOp == true}">
                 <p:column>
                     <p:commandButton value="Edit" action="#{carBean.edit(car)}" update="@form"></p:commandButton>
                     <p:commandButton value="Delete" action="#{carBean.delete(car)}" update="@form"></p:commandButton>
                 </p:column>
-                    
+
                 <p:column headerText="Model" sortBy="#{car.model}">
                     <h:outputText value="#{car.model}"></h:outputText>
                 </p:column>
