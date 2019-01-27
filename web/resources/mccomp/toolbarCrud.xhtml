@@ -17,9 +17,6 @@
                 <p:commandButton value="SAVE" icon="ui-icon-disk" action="#{cc.attrs.crudBean.save()}" disabled="#{cc.attrs.crudBean.findOp == true}" update="@form"></p:commandButton>
                 <p:commandButton value="FIND" icon="ui-icon-search" action="#{cc.attrs.crudBean.findAll()}" update="@form"></p:commandButton>
             </p:toolbarGroup>
-            <p:toolbarGroup align="right">
-                <cc:insertChildren></cc:insertChildren>
-            </p:toolbarGroup>
         </p:toolbar>
     </cc:implementation>
 </html>
