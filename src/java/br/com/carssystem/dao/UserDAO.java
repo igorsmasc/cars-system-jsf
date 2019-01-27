@@ -5,12 +5,10 @@
  */
 package br.com.carssystem.dao;
 
-import br.com.carssystem.entity.Car;
 import br.com.carssystem.entity.User;
 import br.com.carssystem.util.CarFactoryConnection;
 import br.com.carssystem.util.exception.ErrorSystem;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +29,7 @@ public class UserDAO implements CrudDAO<User>{
             if(entity.getId() == null){
             ps = con.prepareStatement("INSERT INTO `user` (`login`,`password`) VALUES (?,?)");
             } else {
-                ps = con.prepareStatement("UPDATE usuario set login=?, password=? where id=?");    
+                ps = con.prepareStatement("update user set login=?, password=? where id=?");    
                 ps.setInt(3, entity.getId());
             }
             ps.setString(1, entity.getLogin());
